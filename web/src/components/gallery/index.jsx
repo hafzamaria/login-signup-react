@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { GlobalContext } from '../../context';
 
-let Home= ()=>{
+let Gallery= ()=>{
 
     let { state, dispatch } = useContext(GlobalContext);
     
@@ -9,10 +9,10 @@ let Home= ()=>{
         <div>I am Home Component!-{state.myNum}
         <button onClick={ () => {
             dispatch({
-                type:"ADD",
+                type:"MINUS",
             })
-        }}>add</button>
+        }}>MINUS</button>
         </div>
     )
 }
-export default Home;
+export default Gallery;

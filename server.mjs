@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import mongoose from 'mongoose';
 import { stringToHash, varifyHash } from "bcrypt-inzi"
 
-const port =process.env.PORT || 5000;
+const port =process.env.PORT || 5001;
 const app = express();
 
 app.use(express.json());
@@ -187,7 +187,9 @@ app.post("/login", (req, res) => {
     }
 
     // check if user already exist // query email user
-    userModel.findOne({ email: body.email }, (err, data) => {
+    userModel.findOne({ email: body.email },
+        'email firstName lastName age password', ///this is called projection
+        (err, data) => {
         if (!err) {
             console.log("data: ", data);
 
@@ -198,8 +200,13 @@ app.post("/login", (req, res) => {
 
                     if (isMatched) {
                         // TODO:  add JWT token
-                        res.send({ message: "login successful" });
-                        return;
+                        res.send({ message: "login successful", 
+                        profile:{
+                        email:data.email,
+                        firstName:data.firstName,
+                       lastName:data.lastName}
+                    });
+                      
                     } else {
                         console.log("user not found");
                         res.status(401).send({ message: "Incorrect email or password" });

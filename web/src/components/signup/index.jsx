@@ -39,15 +39,17 @@ export default function SignUp() {
       email: data.get('email'),
       password: data.get('password'),
       agree:data.get('agree'),
+      
     });
-
-    let baseUrl = 'http://localhost:5000';
+   
+    let baseUrl = 'http://localhost:5001';
     try{
       let response =   await axios.post(`${baseUrl}/signup`,{
         firstName:data.get('firstName'),
         lastName:data.get('lastName'),
         email:data.get('email'),
         password: data.get('password'),
+        image:data.get('image')
         
       })
     

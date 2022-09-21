@@ -124,7 +124,8 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './index.css'
 import axios from 'axios';
-
+import { useContext } from "react";
+import { GlobalContext } from '../../context';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -140,7 +141,10 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignInSide() {
+export default function Login() {
+
+  let { state, dispatch } = useContext(GlobalContext);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -148,14 +152,15 @@ export default function SignInSide() {
       email: data.get('email'),
       password: data.get('password'),
     });
-    let baseUrl = 'http://localhost:5000';
+    let baseUrl = 'http://localhost:5001';
 try{
   let response =   await axios.post(`${baseUrl}/login`,{
     email:data.get('email'),
     password: data.get('password'),
   })
 
-  console.log('response:', response.data.message);
+  console.log('response:', response.data);
+  dispatch({type:'USER_LOGIN', payload:response.data.profile})
 
 
 }catch (e) {
@@ -197,7 +202,7 @@ try{
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Login
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
