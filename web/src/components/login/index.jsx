@@ -152,7 +152,7 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
-    let baseUrl = 'http://localhost:5001';
+    let baseUrl = 'http://localhost:5002';
 try{
   let response =   await axios.post(`${baseUrl}/login`,{
     email:data.get('email'),

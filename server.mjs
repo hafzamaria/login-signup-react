@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import mongoose from 'mongoose';
 import { stringToHash, varifyHash } from "bcrypt-inzi"
 
-const port =process.env.PORT || 5001;
+const port =process.env.PORT || 5002;
 const app = express();
 
 app.use(express.json());
