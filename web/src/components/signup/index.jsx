@@ -42,7 +42,7 @@ export default function SignUp() {
       
     });
    
-    let baseUrl = 'http://localhost:5002';
+    let baseUrl = 'http://localhost:5000';
     try{
       let response =   await axios.post(`${baseUrl}/signup`,{
         firstName:data.get('firstName'),

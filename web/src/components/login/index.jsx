@@ -143,32 +143,39 @@ const theme = createTheme();
 
 export default function Login() {
 
-  let { state, dispatch } = useContext(GlobalContext);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    let baseUrl = 'http://localhost:5002';
-try{
-  let response =   await axios.post(`${baseUrl}/login`,{
-    email:data.get('email'),
-    password: data.get('password'),
-  })
-
-  console.log('response:', response.data);
-  dispatch({type:'USER_LOGIN', payload:response.data.profile})
+    let { state, dispatch } = useContext(GlobalContext);
 
 
-}catch (e) {
-  console.log('Error in api call :' , e);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
 
-}
-    
-  };
+        console.log({
+            email: data.get('email'),
+            password: data.get('password'),
+        });
+
+        let baseUrl = "http://localhost:5000";
+        try {
+            let response = await axios.post(`${baseUrl}/login`,
+                {
+                    email: data.get('email'),
+                    password: data.get('password'),
+                },
+                {
+                    withCredentials: true//////jwt work
+                })
+            console.log("response: ", response.data);
+
+            dispatch({
+                type: "USER_LOGIN",
+                payload: response.data.profile
+            })
+
+        } catch (e) {
+            console.log("Error in api call: ", e);
+        }
+    };
 
   return (
     <ThemeProvider theme={theme}>

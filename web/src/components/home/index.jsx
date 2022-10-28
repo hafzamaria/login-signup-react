@@ -8,9 +8,7 @@ let Home= ()=>{
     return(
         <div>I am Home Component!-{state.myNum}
         <button onClick={ () => {
-            dispatch({
-                type:"ADD",
-            })
+            dispatch({ type:"ADD", })
         }}>add</button>
         </div>
     )

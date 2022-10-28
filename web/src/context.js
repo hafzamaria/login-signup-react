@@ -5,6 +5,7 @@ import  reducer  from './reducer';
 export const GlobalContext = createContext('Initial Value');
 let data = {
   user: {},
+  isLogin: null,////jwt work
   darkTheme: true,
   myNum:5,
 }
