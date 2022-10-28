@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser()) ///jwt work
 
 app.use(cors({/////jwt work
-    origin: ['http://localhost:3000', "*"],
+    origin: ['http://localhost:3000', "*", 'https://react-login-signup-app.netlify.app'],
     credentials: true
 }));
 
